@@ -1,9 +1,8 @@
-{%set name = "ctk-cli" %}
-{%set version = "1.4" %}
-{%set compress_type = "tar.gz" %}
-{%set hash_type = "sha256" %}
-{%set hash_val = "80bad5eae3ce0d1ece63b53dd2c3dbe4b0bb7f6a18d13748866ae09c83b844b9" %}
-{%set build_num = "0" %}
+{% set name = "ctk-cli" %}
+{% set version = "1.4" %}
+{% set compress_type = "tar.gz" %}
+{% set hash_type = "sha256" %}
+{% set hash_val = "80bad5eae3ce0d1ece63b53dd2c3dbe4b0bb7f6a18d13748866ae09c83b844b9" %}
 
 package:
   name: {{ name|lower }}
@@ -11,19 +10,18 @@ package:
 
 source:
   fn: {{ name }}-{{ version }}.{{ compress_type }}
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.{{ compress_type }}
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.{{ compress_type }}
   {{ hash_type }}: {{ hash_val }}
 
 build:
   noarch: python
-  number: {{ build_num }}
-  script: python -m pip install --no-deps --ignore-installed .
+  number: 0
+  script: {{ PYTHON }} -m pip install --no-deps --ignore-installed --no-cache-dir -vvv .
 
 requirements:
   host:
     - pip
     - python
-    - setuptools
 
   run:
     - python
@@ -34,9 +32,7 @@ test:
 
 about:
   home: https://github.com/commontk/ctk-cli
-  # No manifest - see https://github.com/commontk/ctk-cli/pull/16
-  # Filler copy as patch:
-  license_file: '{{ environ["RECIPE_DIR"] }}/LICENSE_Apache_20'
+  license_file: LICENSE_Apache_20
   license: Apache 2.0
   license_family: Apache
   summary: Python interface for inspecting and running CLI modules (as defined by CommonTK)
