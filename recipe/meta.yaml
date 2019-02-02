@@ -1,8 +1,8 @@
 {% set name = "ctk-cli" %}
-{% set version = "1.4" %}
+{% set version = "1.5" %}
 {% set compress_type = "tar.gz" %}
 {% set hash_type = "sha256" %}
-{% set hash_val = "80bad5eae3ce0d1ece63b53dd2c3dbe4b0bb7f6a18d13748866ae09c83b844b9" %}
+{% set hash_val = "63afcf2826d867e608f1542db7493a23466e49b7a7ed611e0f098dae33404645" %}
 
 package:
   name: {{ name|lower }}
@@ -13,7 +13,7 @@ source:
   {{ hash_type }}: {{ hash_val }}
 
 build:
-  number: 1
+  number: 0
   noarch: python
   script: {{ PYTHON }} -m pip install --no-deps --ignore-installed --no-cache-dir -vvv .
 
