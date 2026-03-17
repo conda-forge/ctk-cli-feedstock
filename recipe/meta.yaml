@@ -1,7 +1,6 @@
 {% set name = "ctk-cli" %}
 {% set version = "1.5" %}
 {% set compress_type = "tar.gz" %}
-{% set hash_type = "sha256" %}
 {% set hash_val = "63afcf2826d867e608f1542db7493a23466e49b7a7ed611e0f098dae33404645" %}
 
 package:
@@ -10,22 +9,24 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.{{ compress_type }}
-  {{ hash_type }}: {{ hash_val }}
+  sha256: {{ hash_val }}
 
 build:
-  number: 0
+  number: 1
   noarch: python
   script: {{ PYTHON }} -m pip install --no-deps --ignore-installed --no-cache-dir -vvv .
 
 requirements:
   host:
-    - python
+    - python {{ python_min }}
     - pip
 
   run:
-    - python
+    - python >={{ python_min }}
 
 test:
+  requires:
+    - python {{ python_min }}
   imports:
     - ctk_cli
 
